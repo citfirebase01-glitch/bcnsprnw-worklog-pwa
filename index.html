@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์</title>
+
+  <!-- PWA & Mobile Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#be123c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="รายงาน Tor">
+  <link rel="apple-touch-icon" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
+  <link rel="icon" type="image/png" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
+
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Sarabun', sans-serif;
+      background-color: #f8fafc;
+    }
+
+    /* กรอบแสดงผลระบบ Google Apps Script แบบเต็มจอ 100% */
+    #appFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* แบนเนอร์ปุ่ม One-Click Install สไลด์ขึ้นมาจากขอบล่าง */
+    .pwa-install-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(150%);
+      width: calc(100% - 32px);
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+      border-radius: 20px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 99999;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pwa-install-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .banner-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .banner-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(190, 18, 60, 0.2);
+      flex-shrink: 0;
+    }
+
+    .banner-text {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .banner-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .banner-subtitle {
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+
+    .banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-install-now {
+      background: linear-gradient(135deg, #be123c, #9f1239);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(190, 18, 60, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-install-now:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(190, 18, 60, 0.4);
+    }
+
+    .btn-close-banner {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-close-banner:hover {
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================== -->
+  <!-- ใส่ URL Google Apps Script Web App ของท่านที่นี่ -->
+  <!-- ============================================== -->
+  <iframe 
+    id="appFrame" 
+    src="https://script.google.com/macros/s/1zZYPYng_XOZLObqARRjLq0JC_qT3DvRemb4rPWBLYDDEzrCLsaAUDHGk/exec" 
+    allow="geolocation; camera; microphone; clipboard-read; clipboard-write;"
+    title="ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์">
+  </iframe>
+
+  <!-- Smart One-Click Install Banner -->
+  <div id="pwaBanner" class="pwa-install-banner">
+    <div class="banner-brand">
+      <img src="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK" alt="App Logo" class="banner-icon">
+      <div class="banner-text">
+        <span class="banner-title">ระบบรายงานการปฏิบัติงาน</span>
+        <span class="banner-subtitle">ติดตั้งใช้งานแบบแอปพลิเคชัน</span>
+      </div>
+    </div>
+    <div class="banner-actions">
+      <button type="button" class="btn-install-now" id="btnInstallPwa" onclick="installAppOneClick()">
+        <i class="fa-solid fa-download"></i>
+        <span>ติดตั้ง</span>
+      </button>
+      <button type="button" class="btn-close-banner" onclick="dismissBanner()" title="ปิดแบนเนอร์">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // 1. ลงทะเบียน Service Worker ให้เบราว์เซอร์รับรู้สถานะ PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('PWA Service Worker registered:', reg.scope))
+          .catch(err => console.log('Service Worker registration failed:', err));
+      });
+    }
+
+    // 2. ตรวจสอบว่าแอปถูกติดตั้งและเปิดแบบ Standalone แล้วหรือไม่
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    let deferredPrompt = null;
+    const banner = document.getElementById('pwaBanner');
+
+    // 3. ดักจับ One-Click Install Prompt ของระบบ
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      // ถ้ายังไม่ได้ติดตั้ง ให้แสดงแบนเนอร์ One-Click ทันที
+      if (!isStandalone) {
+        setTimeout(() => {
+          if (banner) banner.classList.add('show');
+        }, 1200);
+      }
+    });
+
+    // 4. ฟังก์ชันกดติดตั้งคลิกเดียว (One-Click)
+    function installAppOneClick() {
+      if (deferredPrompt) {
+        // เด้ง Native Dialog ของระบบขึ้นมาทันที!
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User installed the app');
+            dismissBanner();
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        // หากเป็น iOS หรือเบราว์เซอร์ที่ไม่มี Native Prompt
+        alert('สำหรับ iPhone / iPad:\nแตะปุ่ม "แชร์" (Share) ที่แถบเมนูด้านล่าง แล้วเลือก "เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)');
+      }
+    }
+
+    function dismissBanner() {
+      if (banner) banner.classList.remove('show');
+    }
+
+    // ถ้าติดตั้งสำเร็จแล้ว ให้ซ่อนแบนเนอร์อัตโนมัติ
+    window.addEventListener('appinstalled', () => {
+      dismissBanner();
+      console.log('App successfully installed!');
+    });
+  </script>
+</body>
+</html>
