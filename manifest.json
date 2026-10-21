@@ -1,0 +1,24 @@
+{
+  "name": "ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์",
+  "short_name": "รายงาน Tor",
+  "description": "ระบบรายงานการปฏิบัติงานของบุคลากร วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#be123c",
+  "icons": [
+    {
+      "src": "https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
