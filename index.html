@@ -47,16 +47,16 @@
       position: fixed;
       bottom: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(150%);
+      transform: translateX(-50%) translateY(180%);
       width: calc(100% - 32px);
       max-width: 480px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      border: 1px solid rgba(226, 232, 240, 0.9);
       box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
       border-radius: 20px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -69,16 +69,25 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* บนจอมือถือ ให้แบนเนอร์ลอยเหนือแถบเมนูด้านล่าง */
+    @media (max-width: 600px) {
+      .pwa-install-banner {
+        bottom: 74px;
+        width: calc(100% - 24px);
+        padding: 10px 14px;
+      }
+    }
+
     .banner-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       overflow: hidden;
     }
 
     .banner-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(190, 18, 60, 0.2);
       flex-shrink: 0;
@@ -91,7 +100,7 @@
     }
 
     .banner-title {
-      font-size: 0.92rem;
+      font-size: 0.90rem;
       font-weight: 700;
       color: #0f172a;
       white-space: nowrap;
@@ -100,8 +109,11 @@
     }
 
     .banner-subtitle {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .banner-actions {
@@ -147,12 +159,88 @@
     .btn-close-banner:hover {
       color: #475569;
     }
+
+    /* Modal แนะนำสำหรับ iOS (iPhone / iPad) */
+    .ios-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .ios-modal-overlay.show {
+      display: flex;
+    }
+
+    .ios-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px 20px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .ios-modal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+
+    .ios-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      background: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: #334155;
+    }
+
+    .ios-step-icon {
+      font-size: 1.25rem;
+      color: #be123c;
+      width: 24px;
+      text-align: center;
+    }
+
+    .btn-got-it {
+      margin-top: 10px;
+      width: 100%;
+      background: #be123c;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
   <!-- ============================================== -->
-  <!-- ใส่ URL Google Apps Script Web App ของท่านที่นี่ -->
+  <!-- URL Google Apps Script Web App ของระบบงานหลัก -->
   <!-- ============================================== -->
   <iframe 
     id="appFrame" 
@@ -181,6 +269,33 @@
     </div>
   </div>
 
+  <!-- iOS Install Instruction Modal -->
+  <div id="iosModal" class="ios-modal-overlay" onclick="closeIosModal(event)">
+    <div class="ios-modal-card" onclick="event.stopPropagation()">
+      <div style="font-size: 2.2rem; color: #be123c; margin-bottom: 8px;">
+        <i class="fa-brands fa-apple"></i>
+      </div>
+      <h3 class="ios-modal-title">วิธีติดตั้งบน iPhone / iPad</h3>
+      
+      <div class="ios-step">
+        <span class="ios-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>
+        <span>1. แตะปุ่ม <b>"แชร์" (Share)</b> ที่แถบเมนูด้านล่างของ Safari</span>
+      </div>
+
+      <div class="ios-step">
+        <span class="ios-step-icon"><i class="fa-regular fa-square-plus"></i></span>
+        <span>2. เลื่อนลงแล้วเลือก <b>"เพิ่มไปยังหน้าจอโฮม"</b></span>
+      </div>
+
+      <div class="ios-step">
+        <span class="ios-step-icon"><i class="fa-solid fa-check"></i></span>
+        <span>3. แตะ <b>"เพิ่ม" (Add)</b> ที่มุมขวาบน</span>
+      </div>
+
+      <button type="button" class="btn-got-it" onclick="closeIosModal()">เข้าใจแล้ว</button>
+    </div>
+  </div>
+
   <script>
     // 1. ลงทะเบียน Service Worker ให้เบราว์เซอร์รับรู้สถานะ PWA
     if ('serviceWorker' in navigator) {
@@ -195,24 +310,33 @@
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     let deferredPrompt = null;
     const banner = document.getElementById('pwaBanner');
+    const iosModal = document.getElementById('iosModal');
 
-    // 3. ดักจับ One-Click Install Prompt ของระบบ
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-
-      // ถ้ายังไม่ได้ติดตั้ง ให้แสดงแบนเนอร์ One-Click ทันที
-      if (!isStandalone) {
+    // ฟังก์ชันแสดงแบนเนอร์ (หากยังไม่ได้ติดตั้ง และยังไม่ได้กดปิดในรอบนี้)
+    function showBannerIfEligible() {
+      if (!isStandalone && !sessionStorage.getItem('pwa_dismissed')) {
         setTimeout(() => {
           if (banner) banner.classList.add('show');
         }, 1200);
       }
+    }
+
+    // 3. ดักจับ Native Prompt สำหรับ Android / Chrome / Edge
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      showBannerIfEligible();
     });
 
-    // 4. ฟังก์ชันกดติดตั้งคลิกเดียว (One-Click)
+    // 4. กรณีเปิดบน iOS / Safari หรืออุปกรณ์อื่นๆ ที่ไม่มี beforeinstallprompt
+    window.addEventListener('load', () => {
+      showBannerIfEligible();
+    });
+
+    // 5. ฟังก์ชันกดติดตั้งคลิกเดียว
     function installAppOneClick() {
       if (deferredPrompt) {
-        // เด้ง Native Dialog ของระบบขึ้นมาทันที!
+        // ฝั่ง Android / PC / Chrome: เด้งหน้าต่างติดตั้งของระบบขึ้นมาทันที!
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
@@ -222,13 +346,18 @@
           deferredPrompt = null;
         });
       } else {
-        // หากเป็น iOS หรือเบราว์เซอร์ที่ไม่มี Native Prompt
-        alert('สำหรับ iPhone / iPad:\nแตะปุ่ม "แชร์" (Share) ที่แถบเมนูด้านล่าง แล้วเลือก "เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)');
+        // ฝั่ง iOS (iPhone / iPad) หรือเบราว์เซอร์ที่ไม่มี Native Prompt
+        if (iosModal) iosModal.classList.add('show');
       }
+    }
+
+    function closeIosModal() {
+      if (iosModal) iosModal.classList.remove('show');
     }
 
     function dismissBanner() {
       if (banner) banner.classList.remove('show');
+      sessionStorage.setItem('pwa_dismissed', 'true');
     }
 
     // ถ้าติดตั้งสำเร็จแล้ว ให้ซ่อนแบนเนอร์อัตโนมัติ
