@@ -14,162 +14,285 @@
   <link rel="apple-touch-icon" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
   <link rel="icon" type="image/png" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
 
-  <!-- Font Awesome & Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
+    :root {
+      --primary: #be123c;
+      --primary-dark: #881337;
+      --primary-light: #fff1f2;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg-gradient: linear-gradient(135deg, #fff1f2 0%, #f8fafc 50%, #ffe4e6 100%);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body, html {
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      font-family: 'Sarabun', sans-serif;
-      background-color: #f8fafc;
-    }
-
-    /* กรอบแสดงผลระบบ Google Apps Script แบบเต็มจอ 100% */
-    #appFrame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    /* แบนเนอร์ปุ่ม One-Click Install สไลด์ขึ้นมาจากขอบล่าง */
-    .pwa-install-banner {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(180%);
-      width: calc(100% - 32px);
-      max-width: 480px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
-      border-radius: 20px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      z-index: 99999;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .pwa-install-banner.show {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* บนจอมือถือ ให้แบนเนอร์ลอยเหนือแถบเมนูด้านล่าง */
-    @media (max-width: 600px) {
-      .pwa-install-banner {
-        bottom: 74px;
-        width: calc(100% - 24px);
-        padding: 10px 14px;
-      }
-    }
-
-    .banner-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow: hidden;
-    }
-
-    .banner-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(190, 18, 60, 0.2);
-      flex-shrink: 0;
-    }
-
-    .banner-text {
+      min-height: 100vh;
+      font-family: 'Prompt', 'Sarabun', -apple-system, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-    }
-
-    .banner-title {
-      font-size: 0.90rem;
-      font-weight: 700;
-      color: #0f172a;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .banner-subtitle {
-      font-size: 0.76rem;
-      color: #64748b;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .banner-actions {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
     }
 
-    .btn-install-now {
-      background: linear-gradient(135deg, #be123c, #9f1239);
-      color: #ffffff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      cursor: pointer;
+    /* Ambient Background Light Elements */
+    .ambient-glow {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(190, 18, 60, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+      top: -60px;
+      right: -60px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(225, 29, 72, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+      bottom: -60px;
+      left: -60px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gateway-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 460px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(190, 18, 60, 0.3);
-      transition: all 0.2s ease;
     }
 
-    .btn-install-now:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(190, 18, 60, 0.4);
+    .gateway-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(244, 63, 94, 0.15);
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 45px -10px rgba(190, 18, 60, 0.12), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      transition: transform 0.3s ease;
     }
 
-    .btn-close-banner {
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 4px;
+    /* Emblem Logo with Halo Pulse */
+    .logo-container {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 20px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .btn-close-banner:hover {
-      color: #475569;
+    .logo-halo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(190, 18, 60, 0.25) 0%, rgba(190, 18, 60, 0) 70%);
+      animation: pulseHalo 2.5s infinite ease-in-out;
     }
 
-    /* Modal แนะนำสำหรับ iOS (iPhone / iPad) */
+    @keyframes pulseHalo {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .logo-img {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.22);
+      border: 2px solid #ffffff;
+      background: #ffffff;
+    }
+
+    .inst-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .inst-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .system-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .system-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* LINE Warning Banner (แสดงเมื่อเปิดใน LINE เพื่อป้องกันบั๊ก In-App Browser) */
+    .line-notice-box {
+      display: none;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #92400e;
+    }
+
+    .line-notice-box.show {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .line-notice-icon {
+      font-size: 1.1rem;
+      color: #d97706;
+      margin-top: 2px;
+    }
+
+    /* Auto Redirect Status Card */
+    .redirect-status-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .redirect-status-text {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .redirect-status-text b {
+      color: var(--primary);
+    }
+
+    .btn-cancel-auto {
+      background: none;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      color: #64748b;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Main Action Launch Button */
+    .btn-launch-main {
+      width: 100%;
+      background: linear-gradient(135deg, #be123c 0%, #9f1239 100%);
+      color: #ffffff;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.35);
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .btn-launch-main:hover, .btn-launch-main:active {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(190, 18, 60, 0.45);
+      color: #ffffff;
+    }
+
+    /* Secondary Install Action */
+    .btn-install-secondary {
+      width: 100%;
+      margin-top: 12px;
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid #e2e8f0;
+      padding: 12px 18px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-install-secondary:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* Footer Info */
+    .gateway-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* iOS Modal Instruction Sheet */
     .ios-modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
-      z-index: 100000;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 10000;
       display: none;
       align-items: center;
       justify-content: center;
@@ -183,24 +306,24 @@
     .ios-modal-card {
       background: #ffffff;
       border-radius: 24px;
-      padding: 24px 20px;
+      padding: 28px 22px;
       max-width: 380px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes modalPop {
-      0% { transform: scale(0.9); opacity: 0; }
+    @keyframes popIn {
+      0% { transform: scale(0.92); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .ios-modal-title {
-      font-size: 1.1rem;
+    .ios-modal-card h3 {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      color: var(--text-main);
     }
 
     .ios-step {
@@ -209,64 +332,100 @@
       gap: 12px;
       text-align: left;
       background: #f8fafc;
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-radius: 14px;
       margin-bottom: 10px;
       font-size: 0.88rem;
       color: #334155;
+      border: 1px solid #f1f5f9;
     }
 
-    .ios-step-icon {
+    .ios-step i {
       font-size: 1.25rem;
-      color: #be123c;
+      color: var(--primary);
       width: 24px;
       text-align: center;
     }
 
     .btn-got-it {
-      margin-top: 10px;
+      margin-top: 14px;
       width: 100%;
-      background: #be123c;
+      background: var(--primary);
       color: white;
       border: none;
-      padding: 10px;
-      border-radius: 14px;
+      padding: 12px;
+      border-radius: 50px;
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================== -->
-  <!-- URL Google Apps Script Web App ของระบบงานหลัก -->
-  <!-- ============================================== -->
-  <iframe 
-    id="appFrame" 
-    src="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec" 
-    allow="geolocation; camera; microphone; clipboard-read; clipboard-write;"
-    title="ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์">
-  </iframe>
+  <!-- Ambient Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
 
-  <!-- Smart One-Click Install Banner -->
-  <div id="pwaBanner" class="pwa-install-banner">
-    <div class="banner-brand">
-      <img src="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK" alt="App Logo" class="banner-icon">
-      <div class="banner-text">
-        <span class="banner-title">ระบบรายงานการปฏิบัติงาน</span>
-        <span class="banner-subtitle">ติดตั้งใช้งานแบบแอปพลิเคชัน</span>
+  <div class="gateway-wrapper">
+    <div class="gateway-card">
+      
+      <!-- Emblem Logo -->
+      <div class="logo-container">
+        <div class="logo-halo"></div>
+        <img src="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK" alt="ตราสัญลักษณ์ วพบ.สวรรค์ประชารักษ์" class="logo-img">
       </div>
-    </div>
-    <div class="banner-actions">
-      <button type="button" class="btn-install-now" id="btnInstallPwa" onclick="installAppOneClick()">
-        <i class="fa-solid fa-download"></i>
-        <span>ติดตั้ง</span>
+
+      <!-- Institutional Identity -->
+      <div class="inst-name">วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์</div>
+      <div class="inst-sub">คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</div>
+
+      <!-- System Header -->
+      <h1 class="system-title">ระบบรายงานการปฏิบัติงาน</h1>
+      <p class="system-desc">Personnel Duty Performance Reporting System (TOR)</p>
+
+      <!-- แจ้งเตือนกรณีเปิดผ่าน LINE In-App Browser -->
+      <div id="lineNotice" class="line-notice-box">
+        <i class="fa-solid fa-circle-exclamation line-notice-icon"></i>
+        <div>
+          <b>คำแนะนำสำหรับผู้ใช้แอป LINE:</b><br>
+          เพื่อความรวดเร็วและไม่ติดปัญหาการล็อกอิน แตะปุ่ม <b>"เข้าสู่ระบบปฏิบัติงาน"</b> ด้านล่าง หรือแตะเมนู <b>(⋯)</b> มุมบนขวา แล้วเลือก <i>"เปิดในเบราว์เซอร์อื่น"</i>
+        </div>
+      </div>
+
+      <!-- Countdown Indicator -->
+      <div class="redirect-status-box" id="redirectBox">
+        <div class="redirect-status-text">
+          <i class="fa-solid fa-spinner fa-spin me-1" style="color: var(--primary);"></i>
+          กำลังเปิดระบบใน <b id="countdownSec">3</b> วินาที...
+        </div>
+        <button type="button" class="btn-cancel-auto" onclick="stopAutoRedirect()">
+          <i class="fa-solid fa-pause me-1"></i>หยุด
+        </button>
+      </div>
+
+      <!-- Main Action: เข้าสู่ระบบแบบ Top-Level Direct Link (ไม่ติด Error 401 แน่นอน 100%) -->
+      <a href="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec" 
+         target="_top" 
+         id="btnLaunchApp" 
+         class="btn-launch-main" 
+         onclick="launchAppNow()">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <span>เข้าสู่ระบบปฏิบัติงานทันที</span>
+      </a>
+
+      <!-- Secondary Action: ติดตั้งแอปลงหน้าจอมือถือ (PWA) -->
+      <button type="button" class="btn-install-secondary" id="btnInstallPwa" onclick="handleInstallClick()">
+        <i class="fa-solid fa-mobile-screen-button" style="color: var(--primary);"></i>
+        <span>ติดตั้งแอปลงหน้าจอมือถือ</span>
       </button>
-      <button type="button" class="btn-close-banner" onclick="dismissBanner()" title="ปิดแบนเนอร์">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+
     </div>
+
+    <!-- Gateway Footer -->
+    <footer class="gateway-footer">
+      <div>เวอร์ชัน 1.8.6 • พัฒนาเพื่อการปฏิบัติงานราชการที่สะดวกและปลอดภัย</div>
+    </footer>
   </div>
 
   <!-- iOS Install Instruction Modal -->
@@ -275,20 +434,20 @@
       <div style="font-size: 2.2rem; color: #be123c; margin-bottom: 8px;">
         <i class="fa-brands fa-apple"></i>
       </div>
-      <h3 class="ios-modal-title">วิธีติดตั้งบน iPhone / iPad</h3>
+      <h3>วิธีติดตั้งบน iPhone / iPad</h3>
       
       <div class="ios-step">
-        <span class="ios-step-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>
+        <i class="fa-solid fa-arrow-up-from-bracket"></i>
         <span>1. แตะปุ่ม <b>"แชร์" (Share)</b> ที่แถบเมนูด้านล่างของ Safari</span>
       </div>
 
       <div class="ios-step">
-        <span class="ios-step-icon"><i class="fa-regular fa-square-plus"></i></span>
+        <i class="fa-regular fa-square-plus"></i>
         <span>2. เลื่อนลงแล้วเลือก <b>"เพิ่มไปยังหน้าจอโฮม"</b></span>
       </div>
 
       <div class="ios-step">
-        <span class="ios-step-icon"><i class="fa-solid fa-check"></i></span>
+        <i class="fa-solid fa-check"></i>
         <span>3. แตะ <b>"เพิ่ม" (Add)</b> ที่มุมขวาบน</span>
       </div>
 
@@ -297,27 +456,61 @@
   </div>
 
   <script>
-    // 1. ลงทะเบียน Service Worker ให้เบราว์เซอร์รับรู้สถานะ PWA
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec";
+
+    // 1. ลงทะเบียน Service Worker รองรับเกณฑ์ PWA มาตรฐาน
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('PWA Service Worker registered:', reg.scope))
-          .catch(err => console.log('Service Worker registration failed:', err));
+          .then(reg => console.log('PWA Service Worker ready:', reg.scope))
+          .catch(err => console.log('Service Worker registration skipped:', err));
       });
     }
 
-    // 2. ตรวจสอบว่าแอปถูกติดตั้งและเปิดแบบ Standalone แล้วหรือไม่
+    // 2. ตรวจสอบสถานะการเปิดใช้งาน
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    const isLine = /Line/i.test(navigator.userAgent);
     let deferredPrompt = null;
-    const banner = document.getElementById('pwaBanner');
-    const iosModal = document.getElementById('iosModal');
+    let countdown = 3;
+    let timerId = null;
 
-    // ฟังก์ชันแสดงแบนเนอร์ (หากยังไม่ได้ติดตั้ง และยังไม่ได้กดปิดในรอบนี้)
-    function showBannerIfEligible() {
-      if (!isStandalone && !sessionStorage.getItem('pwa_dismissed')) {
-        setTimeout(() => {
-          if (banner) banner.classList.add('show');
-        }, 1200);
+    // ถ้าเปิดจาก LINE ให้แสดงกล่องคำแนะนำ
+    if (isLine) {
+      const lineBox = document.getElementById('lineNotice');
+      if (lineBox) lineBox.classList.add('show');
+    }
+
+    // ฟังก์ชันเข้าสู่ระบบทันที (Top-Level Navigation ไม่ผ่าน iframe จึงไม่ติด Error 401)
+    function launchAppNow() {
+      if (timerId) clearInterval(timerId);
+      window.location.replace(WEB_APP_URL);
+    }
+
+    // ถ้าผู้ใช้เปิดผ่านไอคอนแอปบนหน้าจอมือถือ (Standalone) ให้พาเข้าหน้า Web App ทันที
+    if (isStandalone) {
+      launchAppNow();
+    } else {
+      // โหมดเปิดจากเบราว์เซอร์ปกติ: เริ่มนับถอยหลัง 3 วินาทีเพื่อความสะดวก
+      startAutoCountdown();
+    }
+
+    function startAutoCountdown() {
+      const secEl = document.getElementById('countdownSec');
+      timerId = setInterval(() => {
+        countdown--;
+        if (secEl) secEl.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(timerId);
+          launchAppNow();
+        }
+      }, 1000);
+    }
+
+    function stopAutoRedirect() {
+      if (timerId) clearInterval(timerId);
+      const box = document.getElementById('redirectBox');
+      if (box) {
+        box.innerHTML = '<div class="redirect-status-text" style="color: #64748b;"><i class="fa-solid fa-circle-check text-success me-1"></i> หยุดการเข้าสู่อัตโนมัติแล้ว คุณสามารถกดติดตั้งหรือกดเข้าสู่ระบบได้ตามต้องการ</div>';
       }
     }
 
@@ -325,46 +518,30 @@
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      showBannerIfEligible();
     });
 
-    // 4. กรณีเปิดบน iOS / Safari หรืออุปกรณ์อื่นๆ ที่ไม่มี beforeinstallprompt
-    window.addEventListener('load', () => {
-      showBannerIfEligible();
-    });
-
-    // 5. ฟังก์ชันกดติดตั้งคลิกเดียว
-    function installAppOneClick() {
+    // 4. ติดตั้ง PWA
+    function handleInstallClick() {
+      stopAutoRedirect();
       if (deferredPrompt) {
-        // ฝั่ง Android / PC / Chrome: เด้งหน้าต่างติดตั้งของระบบขึ้นมาทันที!
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User installed the app');
-            dismissBanner();
+            console.log('User installed the PWA');
           }
           deferredPrompt = null;
         });
       } else {
-        // ฝั่ง iOS (iPhone / iPad) หรือเบราว์เซอร์ที่ไม่มี Native Prompt
+        // อุปกรณ์ iOS (Safari) หรือเบราว์เซอร์ที่ไม่รองรับ Prompt ตรง
+        const iosModal = document.getElementById('iosModal');
         if (iosModal) iosModal.classList.add('show');
       }
     }
 
-    function closeIosModal() {
+    function closeIosModal(e) {
+      const iosModal = document.getElementById('iosModal');
       if (iosModal) iosModal.classList.remove('show');
     }
-
-    function dismissBanner() {
-      if (banner) banner.classList.remove('show');
-      sessionStorage.setItem('pwa_dismissed', 'true');
-    }
-
-    // ถ้าติดตั้งสำเร็จแล้ว ให้ซ่อนแบนเนอร์อัตโนมัติ
-    window.addEventListener('appinstalled', () => {
-      dismissBanner();
-      console.log('App successfully installed!');
-    });
   </script>
 </body>
 </html>
