@@ -227,29 +227,57 @@
 
     /* Main Action Launch Button */
     .btn-launch-main {
+    /* Main Action: Google Workspace Sign-In Button */
+    .btn-launch-google {
       width: 100%;
-      background: linear-gradient(135deg, #be123c 0%, #9f1239 100%);
-      color: #ffffff;
-      border: none;
-      padding: 15px 20px;
+      background: #ffffff;
+      color: #1e293b;
+      border: 1.5px solid #e2e8f0;
+      padding: 12px 18px;
       border-radius: 50px;
-      font-size: 1.05rem;
-      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 14px;
       text-decoration: none;
-      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.35);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
     }
 
-    .btn-launch-main:hover, .btn-launch-main:active {
+    .btn-launch-google:hover, .btn-launch-google:active {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(190, 18, 60, 0.45);
-      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.18);
+      border-color: #f43f5e;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .google-icon-btn {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .btn-google-text-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .btn-google-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .btn-google-sub {
+      font-size: 0.74rem;
+      color: var(--primary);
+      font-weight: 500;
     }
 
     /* Secondary Install Action */
@@ -404,20 +432,23 @@
         </button>
       </div>
 
-      <!-- Main Action: เข้าสู่ระบบแบบ Top-Level Direct Link (ไม่ติด Error 401 แน่นอน 100%) -->
-      <a href="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec" 
+      <!-- Main Action: เข้าสู่ระบบด้วย Google Workspace (ผ่าน AccountChooser ป้องกันบัญชีส่วนตัวตีกัน) -->
+      <a href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec" 
          target="_top" 
          id="btnLaunchApp" 
-         class="btn-launch-main" 
+         class="btn-launch-google" 
          onclick="launchAppNow()">
-        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-        <span>เข้าสู่ระบบปฏิบัติงานทันที</span>
+        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google Logo" class="google-icon-btn">
+        <div class="btn-google-text-group">
+          <span class="btn-google-title">ลงชื่อเข้าใช้ด้วย Google Workspace</span>
+          <span class="btn-google-sub">เลือกบัญชีวิทยาลัย @bcnsprnw.ac.th</span>
+        </div>
       </a>
 
       <!-- Secondary Action: ติดตั้งแอปลงหน้าจอมือถือ (PWA) -->
       <button type="button" class="btn-install-secondary" id="btnInstallPwa" onclick="handleInstallClick()">
         <i class="fa-solid fa-mobile-screen-button" style="color: var(--primary);"></i>
-        <span>ติดตั้งแอปลงหน้าจอมือถือ</span>
+        <span>ติดตั้งแอปลงหน้าจอมือถือ (PWA)</span>
       </button>
 
     </div>
@@ -456,7 +487,8 @@
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec";
+    const RAW_APP_URL = "https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec";
+    const WEB_APP_URL = "https://accounts.google.com/AccountChooser?continue=" + encodeURIComponent(RAW_APP_URL);
 
     // 1. ลงทะเบียน Service Worker รองรับเกณฑ์ PWA มาตรฐาน
     if ('serviceWorker' in navigator) {
