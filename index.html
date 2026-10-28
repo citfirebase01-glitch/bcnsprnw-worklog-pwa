@@ -466,14 +466,15 @@
       <!-- ========================================================= -->
       <!-- 2 ปุ่มหลัก (ถอดแบบเป๊ะ 1:1 จากระบบลงเวลาวิทยาลัย) -->
       <!-- ========================================================= -->
-      <div class="login-actions-group">
+      <div class="login-actions-group" style="display: flex !important; flex-direction: column !important; gap: 14px !important; width: 100% !important; margin: 12px 0 16px 0 !important;">
         
         <!-- ปุ่มที่ 1: เข้าสู่ระบบด้วย Email วิทยาลัย (Google SSO) -->
         <a href="https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec%3Fsrc%3Dpwa" 
            target="_top" 
            class="btn-dual-track btn-track-google" 
-           id="btnSignInGoogle">
-          <div class="track-icon-box">
+           id="btnSignInGoogle"
+           style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; min-height: 64px !important; padding: 12px 18px !important; border-radius: 20px !important; background: #ffffff !important; border: 1.5px solid #cbd5e1 !important; box-shadow: 0 4px 14px rgba(0,0,0,0.06) !important; cursor: pointer !important; text-align: left !important; text-decoration: none !important;">
+          <div class="track-icon-box" style="width: 44px !important; height: 44px !important; min-width: 44px !important; border-radius: 12px !important; background: #ffffff !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important; border: 1px solid #f1f5f9 !important; flex-shrink: 0 !important;">
             <svg class="google-svg-icon" viewBox="0 0 24 24" width="24" height="24">
               <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
               <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
@@ -481,26 +482,27 @@
               <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
             </svg>
           </div>
-          <div class="track-text-group">
-            <div class="track-main-title">เข้าสู่ระบบด้วย Email วิทยาลัย</div>
-            <div class="track-sub-title">@bcnsprnw.ac.th (Google SSO)</div>
+          <div class="track-text-group" style="flex-grow: 1 !important; text-align: left !important; margin: 0 14px !important;">
+            <div class="track-main-title" style="color: #0f172a !important; font-weight: 700 !important; font-size: 1rem !important; line-height: 1.25 !important; font-family: 'Prompt', sans-serif !important;">เข้าสู่ระบบด้วย Email วิทยาลัย</div>
+            <div class="track-sub-title" style="color: #64748b !important; font-size: 0.8rem !important; font-weight: 500 !important; margin-top: 2px !important;">@bcnsprnw.ac.th (Google SSO)</div>
           </div>
-          <i class="fa-solid fa-chevron-right track-chevron"></i>
+          <i class="fa-solid fa-chevron-right track-chevron" style="color: #94a3b8 !important; font-size: 1.05rem !important; flex-shrink: 0 !important;"></i>
         </a>
 
         <!-- ปุ่มที่ 2: เข้าสู่ระบบด้วย User ID & Password (เขียวมรกต) -->
-        <a href="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec?login=pin" 
+        <a href="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec?login=pin" 
            target="_top" 
            class="btn-dual-track btn-track-pin" 
-           id="btnSignInPin">
-          <div class="track-icon-box">
+           id="btnSignInPin"
+           style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; min-height: 64px !important; padding: 12px 18px !important; border-radius: 20px !important; background: #064e3b !important; border: 1.5px solid #10b981 !important; box-shadow: 0 4px 18px rgba(16,185,129,0.22) !important; cursor: pointer !important; text-align: left !important; text-decoration: none !important;">
+          <div class="track-icon-box" style="width: 44px !important; height: 44px !important; min-width: 44px !important; border-radius: 12px !important; background: #042f2e !important; border: 1.2px solid #10b981 !important; color: #34d399 !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.15rem !important; box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important; flex-shrink: 0 !important;">
             <i class="fa-solid fa-key"></i>
           </div>
-          <div class="track-text-group">
-            <div class="track-main-title">เข้าสู่ระบบด้วย User ID & Password</div>
-            <div class="track-sub-title">ติดต่อขอไอดีและรหัสผ่านได้ที่งานเทคโนฯ</div>
+          <div class="track-text-group" style="flex-grow: 1 !important; text-align: left !important; margin: 0 14px !important;">
+            <div class="track-main-title" style="color: #ffffff !important; font-weight: 700 !important; font-size: 1rem !important; line-height: 1.25 !important; font-family: 'Prompt', sans-serif !important;">เข้าสู่ระบบด้วย User ID & Password</div>
+            <div class="track-sub-title" style="color: #34d399 !important; font-size: 0.8rem !important; font-weight: 500 !important; margin-top: 2px !important;">ติดต่อขอไอดีและรหัสผ่านได้ที่งานเทคโนฯ</div>
           </div>
-          <i class="fa-solid fa-chevron-right track-chevron"></i>
+          <i class="fa-solid fa-chevron-right track-chevron" style="color: #34d399 !important; font-size: 1.05rem !important; flex-shrink: 0 !important;"></i>
         </a>
 
       </div>
