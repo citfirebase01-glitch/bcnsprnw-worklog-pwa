@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์</title>
+  <title>ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์ นครสวรรค์</title>
 
   <!-- PWA & Mobile Meta Tags -->
   <link rel="manifest" href="manifest.json">
@@ -408,8 +408,8 @@
       <div class="inst-sub">คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</div>
 
       <!-- System Header -->
-      <h1 class="system-title">ระบบรายงานการปฏิบัติงาน</h1>
-      <p class="system-desc">Personnel Duty Performance Reporting System (TOR)</p>
+      <h1 class="system-title">ระบบบันทึกและรายงานการปฏิบัติงาน</h1>
+      <p class="system-desc">Performance Submission and Report System</p>
 
       <!-- แจ้งเตือนกรณีเปิดผ่าน LINE In-App Browser -->
       <div id="lineNotice" class="line-notice-box">
@@ -432,7 +432,7 @@
       </div>
 
       <!-- Main Action: เข้าสู่ระบบด้วย Google Workspace (ผ่าน AccountChooser ป้องกันบัญชีส่วนตัวตีกัน) -->
-      <a href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec" 
+      <a href="https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec" 
          target="_top" 
          id="btnLaunchApp" 
          class="btn-launch-google" 
@@ -487,7 +487,7 @@
 
   <script>
     const RAW_APP_URL = "https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec";
-    const WEB_APP_URL = "https://accounts.google.com/AccountChooser?continue=" + encodeURIComponent(RAW_APP_URL);
+    const WEB_APP_URL = "https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=" + encodeURIComponent(RAW_APP_URL);
 
     // 1. ลงทะเบียน Service Worker รองรับเกณฑ์ PWA มาตรฐาน
     if ('serviceWorker' in navigator) {
