@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="color-scheme" content="light">
-  <title>ระบบรายงานการปฏิบัติงาน วพบ.สวรรค์ประชารักษ์ นครสวรรค์</title>
+  <meta name="color-scheme" content="dark">
+  <title>ระบบบันทึกรายละเอียดการปฏิบัติงานของบุคลากร - BCNSPRNW</title>
 
   <!-- PWA & Mobile Meta Tags -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#be123c">
+  <meta name="theme-color" content="#090e17">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="รายงาน Tor">
+  <meta name="apple-mobile-web-app-title" content="บันทึกงาน วพบ.">
   <link rel="apple-touch-icon" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
   <link rel="icon" type="image/png" href="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK">
 
@@ -23,12 +23,11 @@
 
   <style>
     :root {
-      --primary: #be123c;
-      --primary-dark: #881337;
-      --primary-light: #fff1f2;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --bg-gradient: linear-gradient(135deg, #fff1f2 0%, #f8fafc 50%, #ffe4e6 100%);
+      --bg-dark: #090e17;
+      --card-bg: linear-gradient(180deg, #111a2e 0%, #0c1322 100%);
+      --text-white: #ffffff;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
     }
 
     * {
@@ -43,141 +42,116 @@
       height: 100%;
       min-height: 100vh;
       font-family: 'Prompt', 'Sarabun', -apple-system, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
+      background: var(--bg-dark);
+      background: radial-gradient(circle at 50% 20%, #0f1c34 0%, #090e17 70%, #05080e 100%);
+      color: var(--text-white);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 24px 16px;
       overflow-x: hidden;
-    }
-
-    /* Ambient Background Light Elements */
-    .ambient-glow {
-      position: fixed;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(190, 18, 60, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-      top: -60px;
-      right: -60px;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .ambient-glow-2 {
-      position: fixed;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(225, 29, 72, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-      bottom: -60px;
-      left: -60px;
-      z-index: 0;
-      pointer-events: none;
     }
 
     .gateway-wrapper {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 460px;
+      max-width: 440px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    /* Central Dark Card (ถอดแบบ 1:1 จากระบบลงเวลาปฏิบัติงานของวิทยาลัย) */
     .gateway-card {
       width: 100%;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(244, 63, 94, 0.15);
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
-      padding: 32px 24px;
-      box-shadow: 0 20px 45px -10px rgba(190, 18, 60, 0.12), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+      padding: 36px 24px 28px 24px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(30, 58, 138, 0.15);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transition: transform 0.3s ease;
     }
 
-    /* Emblem Logo with Halo Pulse */
+    /* Official Emblem with Luminous Blue Halo Ring */
     .logo-container {
+      margin-bottom: 16px;
       position: relative;
-      width: 88px;
-      height: 88px;
-      margin: 0 auto 20px;
+    }
+
+    .hero-logo-circle {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3.5px solid #2563eb;
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), inset 0 0 10px rgba(37, 99, 235, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 8px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .logo-halo {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(190, 18, 60, 0.25) 0%, rgba(190, 18, 60, 0) 70%);
-      animation: pulseHalo 2.5s infinite ease-in-out;
-    }
-
-    @keyframes pulseHalo {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.15); opacity: 1; }
+    .hero-logo-circle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(37, 99, 235, 0.6);
     }
 
     .logo-img {
-      position: relative;
-      width: 76px;
-      height: 76px;
-      border-radius: 20px;
-      object-fit: cover;
-      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.22);
-      border: 2px solid #ffffff;
-      background: #ffffff;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
     }
 
-    .inst-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-      line-height: 1.4;
-    }
-
-    .inst-sub {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .system-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .system-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
+    /* Title Hierarchy */
+    .portal-title-group {
+      text-align: center;
       margin-bottom: 24px;
     }
 
-    /* LINE Warning Banner (แสดงเมื่อเปิดใน LINE เพื่อป้องกันบั๊ก In-App Browser) */
+    .portal-sys-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .portal-college-name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 2px;
+      line-height: 1.4;
+    }
+
+    .portal-faculty-name {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    /* LINE Warning Banner */
     .line-notice-box {
       display: none;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
       border-radius: 14px;
       padding: 10px 14px;
       margin-bottom: 18px;
       text-align: left;
       font-size: 0.82rem;
-      color: #92400e;
+      color: #fde68a;
+      width: 100%;
     }
 
     .line-notice-box.show {
@@ -188,108 +162,165 @@
 
     .line-notice-icon {
       font-size: 1.1rem;
-      color: #d97706;
+      color: #fbbf24;
       margin-top: 2px;
     }
 
-    /* Auto Redirect Status Card */
-    .redirect-status-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 12px 16px;
-      margin-bottom: 20px;
+    /* =========================================================
+       Dual-Track Login Action Buttons (สอดคล้องกับระบบลงเวลา 100%)
+       ========================================================= */
+    .login-actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      margin: 8px 0 16px 0;
+    }
+
+    .btn-dual-track {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-    }
-
-    .redirect-status-text {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      text-align: left;
-    }
-
-    .redirect-status-text b {
-      color: var(--primary);
-    }
-
-    .btn-cancel-auto {
-      background: none;
-      border: 1px solid #cbd5e1;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.74rem;
-      color: #64748b;
+      padding: 14px 20px;
+      border-radius: 22px;
+      border: 1.5px solid transparent;
       cursor: pointer;
-      white-space: nowrap;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      font-family: inherit;
+      outline: none;
+      position: relative;
     }
 
-    /* Main Action: Google Workspace Sign-In Button */
-    .btn-launch-google {
-      width: 100%;
+    .btn-dual-track:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-dual-track:active {
+      transform: translateY(0);
+    }
+
+    /* ปุ่มที่ 1: Google SSO (สีขาว/สว่าง โดดเด่น) */
+    .btn-track-google {
       background: #ffffff;
-      color: #1e293b;
-      border: 1.5px solid #e2e8f0;
-      padding: 12px 18px;
-      border-radius: 50px;
-      cursor: pointer;
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-track-google:hover {
+      background: #f8fafc;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-track-google .track-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      text-decoration: none;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      font-family: inherit;
-    }
-
-    .btn-launch-google:hover, .btn-launch-google:active {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.18);
-      border-color: #f43f5e;
-      background: #ffffff;
-      color: #0f172a;
-    }
-
-    .google-icon-btn {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f1f5f9;
       flex-shrink: 0;
     }
 
-    .btn-google-text-group {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .btn-google-title {
-      font-size: 0.96rem;
-      font-weight: 700;
+    .btn-track-google .track-main-title {
       color: #0f172a;
+      font-weight: 700;
+      font-size: 1.05rem;
       line-height: 1.25;
     }
 
-    .btn-google-sub {
-      font-size: 0.74rem;
-      color: var(--primary);
+    .btn-track-google .track-sub-title {
+      color: #64748b;
+      font-size: 0.82rem;
       font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .btn-track-google .track-chevron {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-track-google:hover .track-chevron {
+      transform: translateX(3px);
+      color: #475569;
+    }
+
+    /* ปุ่มที่ 2: User ID & Password (เขียวมรกตเข้ม) */
+    .btn-track-pin {
+      background: #064e3b;
+      border-color: #10b981;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.22);
+    }
+
+    .btn-track-pin:hover {
+      background: #065f46;
+      border-color: #34d399;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.38);
+    }
+
+    .btn-track-pin .track-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: #042f2e;
+      border: 1.2px solid #10b981;
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      flex-shrink: 0;
+    }
+
+    .btn-track-pin .track-main-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .btn-track-pin .track-sub-title {
+      color: #34d399;
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .btn-track-pin .track-chevron {
+      color: #34d399;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-track-pin:hover .track-chevron {
+      transform: translateX(3px);
+      color: #6ee7b7;
+    }
+
+    .track-text-group {
+      flex-grow: 1;
+      text-align: left;
+      margin-left: 14px;
     }
 
     /* Secondary Install Action */
     .btn-install-secondary {
       width: 100%;
-      margin-top: 12px;
-      background: #ffffff;
-      color: var(--text-main);
-      border: 1px solid #e2e8f0;
-      padding: 12px 18px;
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 18px;
       border-radius: 50px;
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -300,25 +331,49 @@
     }
 
     .btn-install-secondary:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     /* Footer Info */
-    .gateway-footer {
+    .portal-footer {
       margin-top: 24px;
       text-align: center;
+    }
+
+    .footer-college-name {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .footer-faculty-name {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .badge-system-version {
+      background: #0f2942;
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 50px;
+      font-weight: 500;
       font-size: 0.76rem;
-      color: var(--text-muted);
+      padding: 4px 14px;
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     /* iOS Modal Instruction Sheet */
     .ios-modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 10000;
       display: none;
       align-items: center;
@@ -331,13 +386,14 @@
     }
 
     .ios-modal-card {
-      background: #ffffff;
+      background: #111a2e;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 24px;
       padding: 28px 22px;
       max-width: 380px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
       animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -348,36 +404,27 @@
 
     .ios-modal-card h3 {
       font-size: 1.15rem;
-      font-weight: 700;
+      color: #ffffff;
       margin-bottom: 16px;
-      color: var(--text-main);
     }
 
     .ios-step {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       text-align: left;
-      background: #f8fafc;
-      padding: 12px 14px;
-      border-radius: 14px;
-      margin-bottom: 10px;
       font-size: 0.88rem;
-      color: #334155;
-      border: 1px solid #f1f5f9;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 14px;
+      border-radius: 14px;
     }
 
-    .ios-step i {
-      font-size: 1.25rem;
-      color: var(--primary);
-      width: 24px;
-      text-align: center;
-    }
-
-    .btn-got-it {
-      margin-top: 14px;
+    .btn-close-modal {
       width: 100%;
-      background: var(--primary);
+      margin-top: 14px;
+      background: #0284c7;
       color: white;
       border: none;
       padding: 12px;
@@ -390,159 +437,137 @@
 </head>
 <body>
 
-  <!-- Ambient Glows -->
-  <div class="ambient-glow"></div>
-  <div class="ambient-glow-2"></div>
-
   <div class="gateway-wrapper">
     <div class="gateway-card">
       
-      <!-- Emblem Logo -->
+      <!-- Emblem Logo with Luminous Blue Halo -->
       <div class="logo-container">
-        <div class="logo-halo"></div>
-        <img src="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK" alt="ตราสัญลักษณ์ วพบ.สวรรค์ประชารักษ์" class="logo-img">
+        <div class="hero-logo-circle">
+          <img src="https://lh5.googleusercontent.com/d/1P3AjK1L5IAhKvStA5e27okTWn0f0dfbK" alt="ตราสัญลักษณ์ วพบ.สวรรค์ประชารักษ์" class="logo-img">
+        </div>
       </div>
 
       <!-- Institutional Identity -->
-      <div class="inst-name">วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์</div>
-      <div class="inst-sub">คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</div>
-
-      <!-- System Header -->
-      <h1 class="system-title">ระบบบันทึกและรายงานการปฏิบัติงาน</h1>
-      <p class="system-desc">Performance Submission and Report System</p>
+      <div class="portal-title-group">
+        <h1 class="portal-sys-title">ระบบบันทึกรายละเอียดการปฏิบัติงานของบุคลากร</h1>
+        <div class="portal-college-name">วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์</div>
+        <div class="portal-faculty-name">คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</div>
+      </div>
 
       <!-- แจ้งเตือนกรณีเปิดผ่าน LINE In-App Browser -->
       <div id="lineNotice" class="line-notice-box">
         <i class="fa-solid fa-circle-exclamation line-notice-icon"></i>
         <div>
           <b>คำแนะนำสำหรับผู้ใช้แอป LINE:</b><br>
-          เพื่อความรวดเร็วและไม่ติดปัญหาการล็อกอิน แตะปุ่ม <b>"เข้าสู่ระบบปฏิบัติงาน"</b> ด้านล่าง หรือแตะเมนู <b>(⋯)</b> มุมบนขวา แล้วเลือก <i>"เปิดในเบราว์เซอร์อื่น"</i>
+          เพื่อความรวดเร็วและไม่ติดปัญหาการล็อกอิน แตะปุ่มเข้าสู่ระบบด้านล่าง หรือแตะเมนู <b>(⋯)</b> มุมบนขวา แล้วเลือก <i>"เปิดในเบราว์เซอร์อื่น"</i>
         </div>
       </div>
 
-      <!-- Countdown Indicator -->
-      <div class="redirect-status-box" id="redirectBox">
-        <div class="redirect-status-text">
-          <i class="fa-solid fa-spinner fa-spin me-1" style="color: var(--primary);"></i>
-          กำลังเปิดระบบใน <b id="countdownSec">3</b> วินาที...
-        </div>
-        <button type="button" class="btn-cancel-auto" onclick="stopAutoRedirect()">
-          <i class="fa-solid fa-pause me-1"></i>หยุด
-        </button>
-      </div>
+      <!-- ========================================================= -->
+      <!-- 2 ปุ่มหลัก (ถอดแบบเป๊ะ 1:1 จากระบบลงเวลาวิทยาลัย) -->
+      <!-- ========================================================= -->
+      <div class="login-actions-group">
+        
+        <!-- ปุ่มที่ 1: เข้าสู่ระบบด้วย Email วิทยาลัย (Google SSO) -->
+        <a href="https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec" 
+           target="_top" 
+           class="btn-dual-track btn-track-google" 
+           id="btnSignInGoogle">
+          <div class="track-icon-box">
+            <svg class="google-svg-icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+          </div>
+          <div class="track-text-group">
+            <div class="track-main-title">เข้าสู่ระบบด้วย Email วิทยาลัย</div>
+            <div class="track-sub-title">@bcnsprnw.ac.th (Google SSO)</div>
+          </div>
+          <i class="fa-solid fa-chevron-right track-chevron"></i>
+        </a>
 
-      <!-- Main Action: เข้าสู่ระบบด้วย Google Workspace (ผ่าน AccountChooser ป้องกันบัญชีส่วนตัวตีกัน) -->
-      <a href="https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec" 
-         target="_top" 
-         id="btnLaunchApp" 
-         class="btn-launch-google" 
-         onclick="launchAppNow()">
-        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google Logo" class="google-icon-btn" width="28" height="28">
-        <div class="btn-google-text-group">
-          <span class="btn-google-title">ลงชื่อเข้าใช้ด้วย Google Workspace</span>
-          <span class="btn-google-sub">เลือกบัญชีวิทยาลัย @bcnsprnw.ac.th</span>
-        </div>
-      </a>
+        <!-- ปุ่มที่ 2: เข้าสู่ระบบด้วย User ID & Password (เขียวมรกต) -->
+        <a href="https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG%2Fexec?login=pin" 
+           target="_top" 
+           class="btn-dual-track btn-track-pin" 
+           id="btnSignInPin">
+          <div class="track-icon-box">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <div class="track-text-group">
+            <div class="track-main-title">เข้าสู่ระบบด้วย User ID & Password</div>
+            <div class="track-sub-title">ติดต่อขอไอดีและรหัสผ่านได้ที่งานเทคโนฯ</div>
+          </div>
+          <i class="fa-solid fa-chevron-right track-chevron"></i>
+        </a>
+
+      </div>
 
       <!-- Secondary Action: ติดตั้งแอปลงหน้าจอมือถือ (PWA) -->
       <button type="button" class="btn-install-secondary" id="btnInstallPwa" onclick="handleInstallClick()">
-        <i class="fa-solid fa-mobile-screen-button" style="color: var(--primary);"></i>
+        <i class="fa-solid fa-mobile-screen-button me-1"></i>
         <span>ติดตั้งแอปลงหน้าจอมือถือ (PWA)</span>
       </button>
 
     </div>
 
     <!-- Gateway Footer -->
-    <footer class="gateway-footer">
-      <div>เวอร์ชัน 1.8.6 • พัฒนาเพื่อการปฏิบัติงานราชการที่สะดวกและปลอดภัย</div>
+    <footer class="portal-footer">
+      <div class="footer-college-name">วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์</div>
+      <div class="footer-faculty-name">คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</div>
+      <div class="mt-2">
+        <span class="badge-system-version">v2.2.66 • Build 2026.10.22</span>
+      </div>
     </footer>
   </div>
 
   <!-- iOS Install Instruction Modal -->
   <div id="iosModal" class="ios-modal-overlay" onclick="closeIosModal(event)">
     <div class="ios-modal-card" onclick="event.stopPropagation()">
-      <div style="font-size: 2.2rem; color: #be123c; margin-bottom: 8px;">
+      <div style="font-size: 2.2rem; color: #38bdf8; margin-bottom: 8px;">
         <i class="fa-brands fa-apple"></i>
       </div>
       <h3>วิธีติดตั้งบน iPhone / iPad</h3>
       
       <div class="ios-step">
-        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-        <span>1. แตะปุ่ม <b>"แชร์" (Share)</b> ที่แถบเมนูด้านล่างของ Safari</span>
+        <i class="fa-solid fa-arrow-up-from-bracket" style="color: #38bdf8; font-size: 1.1rem;"></i>
+        <span>1. แตะปุ่ม <b>แชร์ (Share)</b> ที่แถบด้านล่างของ Safari</span>
       </div>
-
+      
       <div class="ios-step">
-        <i class="fa-regular fa-square-plus"></i>
-        <span>2. เลื่อนลงแล้วเลือก <b>"เพิ่มไปยังหน้าจอโฮม"</b></span>
+        <i class="fa-regular fa-square-plus" style="color: #38bdf8; font-size: 1.1rem;"></i>
+        <span>2. เลื่อนลงแล้วเลือก <b>"เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)</b></span>
       </div>
-
+      
       <div class="ios-step">
-        <i class="fa-solid fa-check"></i>
-        <span>3. แตะ <b>"เพิ่ม" (Add)</b> ที่มุมขวาบน</span>
+        <i class="fa-solid fa-check" style="color: #10b981; font-size: 1.1rem;"></i>
+        <span>3. แตะ <b>"เพิ่ม" (Add)</b> ที่มุมบนขวา เพื่อเสร็จสิ้น</span>
       </div>
 
-      <button type="button" class="btn-got-it" onclick="closeIosModal()">เข้าใจแล้ว</button>
+      <button type="button" class="btn-close-modal" onclick="closeIosModal()">รับทราบ</button>
     </div>
   </div>
 
   <script>
-    const RAW_APP_URL = "https://script.google.com/macros/s/AKfycbyHNQRaC7Vjxlg6NIkO-_5lf8eLd6Bp01HKI772MfZypbocjLIrhcCZigN_DK7Cg9oG/exec";
-    const WEB_APP_URL = "https://accounts.google.com/AccountChooser?hd=bcnsprnw.ac.th&continue=" + encodeURIComponent(RAW_APP_URL);
-
-    // 1. ลงทะเบียน Service Worker รองรับเกณฑ์ PWA มาตรฐาน
+    // 1. ลงทะเบียน Service Worker สำหรับ PWA Caching
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('PWA Service Worker ready:', reg.scope))
-          .catch(err => console.log('Service Worker registration skipped:', err));
+        navigator.serviceWorker.register('sw.js')
+          .then((reg) => console.log('Service Worker Registered!', reg.scope))
+          .catch((err) => console.error('Service Worker Registration Failed:', err));
       });
     }
 
     // 2. ตรวจสอบสถานะการเปิดใช้งาน
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     const isLine = /Line/i.test(navigator.userAgent);
     let deferredPrompt = null;
-    let countdown = 3;
-    let timerId = null;
 
     // ถ้าเปิดจาก LINE ให้แสดงกล่องคำแนะนำ
     if (isLine) {
       const lineBox = document.getElementById('lineNotice');
       if (lineBox) lineBox.classList.add('show');
-    }
-
-    // ฟังก์ชันเข้าสู่ระบบทันที (Top-Level Navigation ไม่ผ่าน iframe จึงไม่ติด Error 401)
-    function launchAppNow() {
-      if (timerId) clearInterval(timerId);
-      window.location.replace(WEB_APP_URL);
-    }
-
-    // ถ้าผู้ใช้เปิดผ่านไอคอนแอปบนหน้าจอมือถือ (Standalone) ให้พาเข้าหน้า Web App ทันที
-    if (isStandalone) {
-      launchAppNow();
-    } else {
-      // โหมดเปิดจากเบราว์เซอร์ปกติ: เริ่มนับถอยหลัง 3 วินาทีเพื่อความสะดวก
-      startAutoCountdown();
-    }
-
-    function startAutoCountdown() {
-      const secEl = document.getElementById('countdownSec');
-      timerId = setInterval(() => {
-        countdown--;
-        if (secEl) secEl.textContent = countdown;
-        if (countdown <= 0) {
-          clearInterval(timerId);
-          launchAppNow();
-        }
-      }, 1000);
-    }
-
-    function stopAutoRedirect() {
-      if (timerId) clearInterval(timerId);
-      const box = document.getElementById('redirectBox');
-      if (box) {
-        box.innerHTML = '<div class="redirect-status-text" style="color: #64748b;"><i class="fa-solid fa-circle-check text-success me-1"></i> หยุดการเข้าสู่อัตโนมัติแล้ว คุณสามารถกดติดตั้งหรือกดเข้าสู่ระบบได้ตามต้องการ</div>';
-      }
     }
 
     // 3. ดักจับ Native Prompt สำหรับ Android / Chrome / Edge
@@ -553,7 +578,6 @@
 
     // 4. ติดตั้ง PWA
     function handleInstallClick() {
-      stopAutoRedirect();
       if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
@@ -569,7 +593,7 @@
       }
     }
 
-    function closeIosModal(e) {
+    function closeIosModal() {
       const iosModal = document.getElementById('iosModal');
       if (iosModal) iosModal.classList.remove('show');
     }
