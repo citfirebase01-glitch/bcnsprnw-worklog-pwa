@@ -19,7 +19,7 @@
 
 <br>
 
-**[🌐 เข้าสู่ระบบใช้งานจริง](https://cit-workreport.web.app)** • **[📖 คู่มือการใช้งาน](https://cit-workreport.web.app)** • **[รายงานปัญหา / แจ้งข้อเสนอแนะ](https://github.com/citfirebase01-glitch/bcnsprnw-worklog-pwa/issues)**
+**[🌐 เข้าสู่ระบบใช้งานจริง](https://cit-workreport.web.app)** • **[📖 คู่มือการใช้งาน](USER_MANUAL.md)** • **[💬 รายงานปัญหา / แจ้งข้อเสนอแนะ](mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%87%E0%B8%B2%E0%B8%99%20BCNSPRNW)**
 
 </div>
 
