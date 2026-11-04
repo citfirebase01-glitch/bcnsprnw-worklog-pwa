@@ -19,7 +19,16 @@
 
 <br>
 
-**[🌐 เข้าสู่ระบบใช้งานจริง](https://cit-workreport.web.app)** • **[📖 คู่มือการใช้งาน](USER_MANUAL.md)** • **[💬 รายงานปัญหา / แจ้งข้อเสนอแนะ](mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%87%E0%B8%B2%E0%B8%99%20BCNSPRNW)**
+<div align="center">
+
+### ⚡ **ทางลัดเข้าสู่ระบบและเอกสารข้อมูล (Quick Access)**
+
+| 🌐 เข้าใช้งานระบบ | 📖 คู่มือการใช้งาน (TOR) | 💬 รายงานปัญหา / ข้อเสนอแนะ |
+| :---: | :---: | :---: |
+| <a href="https://web.app" target="_blank"><img src="https://shields.io" alt="เข้าสู่ระบบจริง" height="40"></a> | <a href="USER_MANUAL.md"><img src="https://shields.io" alt="คู่มือการใช้งาน" height="40"></a> | <a href="mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B..."><img src="https://shields.io" alt="รายงานปัญหา" height="40"></a> |
+| `cit-workreport.web.app` | `Markdown & PDF` | `hr@bcnsprnw.ac.th` |
+
+</div>
 
 </div>
 
