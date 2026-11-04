@@ -6,7 +6,7 @@
   <img src="https://lh5.googleusercontent.com/d/1tDVKF6qFEl7_avxewudlClYsk9qkrgop" alt="ตราสัญลักษณ์ 1" height="85">
   &nbsp;&nbsp;&nbsp;&nbsp;
 </p>
-    
+
 # 📋 ระบบรายงานการปฏิบัติงานของบุคลากร (BCNSPRNW WorkReport)
 ### Personnel Duty Performance Reporting & Evaluation Platform
 **วิทยาลัยพยาบาลบรมราชชนนี สวรรค์ประชารักษ์ นครสวรรค์ | คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก**
@@ -17,20 +17,61 @@
 [![Database](https://img.shields.io/badge/Database-MariaDB%20%7C%20Google%20Sheets-003545?style=for-the-badge&logo=mariadb&logoColor=white)](https://mariadb.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
+</div>
+
 <br>
 
-<div align="center">
+### ⚡ ทางลัดเข้าสู่ระบบและเอกสารข้อมูล (Quick Access Hub)
 
-### ⚡ **ทางลัดเข้าสู่ระบบและเอกสารข้อมูล (Quick Access)**
-
-| 🌐 เข้าใช้งานระบบ | 📖 คู่มือการใช้งาน (TOR) | 💬 รายงานปัญหา / ข้อเสนอแนะ |
-| :---: | :---: | :---: |
-| <a href="https://web.app" target="_blank"><img src="https://shields.io" alt="เข้าสู่ระบบจริง" height="40"></a> | <a href="USER_MANUAL.md"><img src="https://shields.io" alt="คู่มือการใช้งาน" height="40"></a> | <a href="mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B..."><img src="https://shields.io" alt="รายงานปัญหา" height="40"></a> |
-| `cit-workreport.web.app` | `Markdown & PDF` | `hr@bcnsprnw.ac.th` |
-
-</div>
-
-</div>
+<table align="center" width="100%">
+  <tr>
+    <td align="center" width="33%" valign="top">
+      <br>
+      <a href="https://cit-workreport.web.app">
+        <img src="https://img.shields.io/badge/Production-Live%20Ready-10b981?style=flat-square" alt="Status" />
+      </a>
+      <br><br>
+      <b>🌐 เข้าใช้งานระบบจริง</b>
+      <p><sub>เว็บบันทึกงาน PWA สำหรับบุคลากร ติดตั้งลงมือถือได้ ใช้งานสะดวกรวดเร็ว</sub></p>
+      <a href="https://cit-workreport.web.app">
+        <img src="https://img.shields.io/badge/LAUNCH_APP-cit--workreport.web.app-be123c?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch App" />
+      </a>
+      <br><br>
+      <sub>🔗 <a href="https://cit-workreport.web.app"><b>เปิดใช้งานระบบทันที →</b></a></sub>
+      <br><br>
+    </td>
+    <td align="center" width="33%" valign="top">
+      <br>
+      <a href="USER_MANUAL.md">
+        <img src="https://img.shields.io/badge/Documentation-v2.4%20Official-0284c7?style=flat-square" alt="Status" />
+      </a>
+      <br><br>
+      <b>📖 คู่มือการใช้งาน (TOR)</b>
+      <p><sub>ขั้นตอนการบันทึกงาน การตรวจรับรองงาน One-Click และคำแนะนำระบบ</sub></p>
+      <a href="USER_MANUAL.md">
+        <img src="https://img.shields.io/badge/USER_MANUAL-View_Full_Guide-0284c7?style=for-the-badge&logo=gitbook&logoColor=white" alt="User Manual" />
+      </a>
+      <br><br>
+      <sub>📑 <a href="USER_MANUAL.md"><b>อ่านคู่มือฉบับเต็ม →</b></a></sub>
+      <br><br>
+    </td>
+    <td align="center" width="33%" valign="top">
+      <br>
+      <a href="mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%87%E0%B8%B2%E0%B8%99%20BCNSPRNW">
+        <img src="https://img.shields.io/badge/Helpdesk-CIT%20%26%20HR-16a34a?style=flat-square" alt="Status" />
+      </a>
+      <br><br>
+      <b>💬 รายงานปัญหา / เสนอแนะ</b>
+      <p><sub>แจ้งปัญหาการใช้งาน ข้อขัดข้อง หรือติดต่อฝ่ายบุคคลและทีมเทคนิค (CIT)</sub></p>
+      <a href="mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%87%E0%B8%B2%E0%B8%99%20BCNSPRNW">
+        <img src="https://img.shields.io/badge/HELPDESK-Contact_Support-16a34a?style=for-the-badge&logo=gmail&logoColor=white" alt="Helpdesk Support" />
+      </a>
+      <br><br>
+      <sub>✉️ <a href="mailto:hr@bcnsprnw.ac.th?subject=%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%87%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%87%E0%B8%B2%E0%B8%99%20BCNSPRNW"><b>ส่งอีเมลแจ้งเรื่อง →</b></a></sub>
+      <br><br>
+    </td>
+  </tr>
+</table>
 
 ---
 
